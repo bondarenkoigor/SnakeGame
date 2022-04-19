@@ -8,9 +8,20 @@ namespace SnakeGame.CellTypes
 {
     internal class FoodCell : Cell
     {
-        public FoodCell()
+        public int FoodSize { get; private set; }
+        public FoodCell(bool IsBonus)
         {
-            Symbol = '0';
+            if (IsBonus)
+            {
+                Symbol = '☼';
+                FoodSize = 3;
+            }
+            else
+            {
+                Symbol = '·';
+                FoodSize = 1;
+            }
         }
+
     }
 }

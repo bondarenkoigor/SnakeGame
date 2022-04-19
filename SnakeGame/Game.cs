@@ -67,7 +67,10 @@ namespace SnakeGame
             MoveSnake();
             PrintMap();
 
-            if (Cells[SnakeHead.CoordX, SnakeHead.CoordY] is FoodCell) EatFood();
+            if (Cells[SnakeHead.CoordX, SnakeHead.CoordY] is FoodCell)
+            {
+                EatFood((Cells[SnakeHead.CoordX, SnakeHead.CoordY] as FoodCell).FoodSize);
+            }
             if (Cells[SnakeHead.CoordX, SnakeHead.CoordY] is Obstacle || Cells[SnakeHead.CoordX, SnakeHead.CoordY] is SnakeCell) return false;
 
 
@@ -118,12 +121,13 @@ namespace SnakeGame
                 if (Cells[x, y] is Obstacle || Cells[x, y] is SnakeCell || (x == SnakeHead.CoordX && y == SnakeHead.CoordY)) continue;
                 else break;
             }
-            Cells[x, y] = new FoodCell();
+            bool IsBonus = (rand.Next(0, 10) == 9) ? true : false; //10% шанс бонуса
+            Cells[x, y] = new FoodCell(IsBonus);
         }
-        public void EatFood()
+        public void EatFood(int FoodSize)
         {
             Cells[SnakeHead.CoordX, SnakeHead.CoordY] = new Cell();
-            SnakeSize++;
+            SnakeSize += FoodSize;
             for (int i = 0; i < SizeY; i++)
             {
                 for (int j = 0; j < SizeX; j++)
@@ -131,7 +135,7 @@ namespace SnakeGame
                     if (Cells[j, i] is SnakeCell)
                     {
                         SnakeCell tmp = Cells[j, i] as SnakeCell;
-                        tmp.LifeTime++;
+                        tmp.LifeTime += FoodSize;
                         Cells[j, i] = tmp;
                     }
                 }
