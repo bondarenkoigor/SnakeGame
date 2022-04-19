@@ -14,6 +14,7 @@ namespace SnakeGame
             if (speed == 1) speed = 500;
             else if (speed == 3) speed = 100;
             else  speed = 300;
+            Console.Clear();
             return new Game(x, y, speed);
 
         }
