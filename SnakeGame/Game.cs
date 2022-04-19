@@ -12,9 +12,10 @@ namespace SnakeGame
         public Snake SnakeHead { get; private set; }
         public string SnakeDirection { get; private set; }
         public int SnakeSize { get; private set; }
+        public int Speed { get; private set; }
 
 
-        public Game(int sizeX, int sizeY)
+        public Game(int sizeX, int sizeY, int speed)
         {
             SizeX = sizeX;
             SizeY = sizeY;
@@ -22,6 +23,7 @@ namespace SnakeGame
             SnakeHead = new Snake(SizeX / 2, SizeY / 2);
             SnakeDirection = "right";
             SnakeSize = 1;
+            Speed = speed;
         }
 
         public void Start()
@@ -71,9 +73,9 @@ namespace SnakeGame
             {
                 EatFood((Cells[SnakeHead.CoordX, SnakeHead.CoordY] as FoodCell).FoodSize);
             }
+
+            Thread.Sleep(Speed);
             if (Cells[SnakeHead.CoordX, SnakeHead.CoordY] is Obstacle || Cells[SnakeHead.CoordX, SnakeHead.CoordY] is SnakeCell) return false;
-
-
             return true;
         }
 
