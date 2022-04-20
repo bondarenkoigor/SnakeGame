@@ -24,7 +24,7 @@ namespace SnakeGame
             game.Start();
             while (game.GameCycle()) { }
             Console.Clear();
-            Console.WriteLine("Game over");
+            game.GameOverScreen();
         }
     }
 }

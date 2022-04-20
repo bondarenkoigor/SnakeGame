@@ -35,6 +35,15 @@ namespace SnakeGame
             ResizeWindow();
         }
 
+        public void GameOverScreen()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 4, 0);
+            Console.WriteLine("GAME OVER");
+            Console.SetCursorPosition(Console.WindowWidth / 2 - 4, 1);
+            Console.WriteLine($"Your score: {SnakeSize}");
+        }
+
         public void ResizeWindow()
         {
             Console.WindowHeight = SizeY;
@@ -92,6 +101,7 @@ namespace SnakeGame
         public void StartThread()
         {
             Thread th = new Thread(KeyPressCheck);
+            th.IsBackground = true;
             th.Start();
         }
 
