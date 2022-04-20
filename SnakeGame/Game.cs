@@ -32,6 +32,13 @@ namespace SnakeGame
             PrintMap();
             PlaceFood();
             StartThread();
+            ResizeWindow();
+        }
+
+        public void ResizeWindow()
+        {
+            Console.WindowHeight = SizeY;
+            Console.WindowWidth = SizeX;
         }
 
         public void GenerateMap()
@@ -58,9 +65,12 @@ namespace SnakeGame
             }
             Console.SetCursorPosition(SnakeHead.CoordX, SnakeHead.CoordY);
             Console.Write(SnakeHead.Symbol);
-            Console.SetCursorPosition(0, SizeY + 2);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(1, SizeY - 1);
             Console.Write($"Snake size: {SnakeSize}");
             Console.SetCursorPosition(0, 0);
+            Console.ResetColor();
         }
         public bool GameCycle()
         {
